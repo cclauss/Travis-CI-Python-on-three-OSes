@@ -38,7 +38,7 @@ matrix:
     - name: "Python 3.5 on Xenial Linux"
       <<: *xenial-steps
       python: 3.5
-    - name: "Python 3.6 on Xenial Linux"
+     - name: "Python 3.6 on Xenial Linux"
       <<: *xenial-steps
       python: 3.6
     - name: "Python 3.7 on Xenial Linux"
@@ -51,12 +51,14 @@ matrix:
     - name: "Python 3.5 on macOS"
       <<: *osx-steps
       python: 3.5
+      pyenv install 3.5
     - name: "Python 3.6 on macOS"
       <<: *osx-steps
       python: 3.6
     - name: "Python 3.7 on macOS"
       <<: *osx-steps
       python: 3.7
+      pyenv install 3.7
     # Trusty Linux
     - name: "Python 2.7 on Windows"
       <<: *windows-steps
