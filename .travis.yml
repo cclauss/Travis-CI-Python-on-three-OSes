@@ -18,6 +18,12 @@ matrix:
   allow_failures:
     - name: "Python 3.7 on Trusty Linux"
   include:
+    # Trusty Linux cpp
+    - name: "Trusty Linux cpp"
+      language: python
+    # Xenial Linux cpp
+    - name: "Xenial Linux cpp"
+      language: python
     # Trusty Linux
     - name: "Python 2.7 on Trusty Linux"
       <<: *trusty-steps
@@ -31,7 +37,7 @@ matrix:
     - name: "Python 3.7 on Trusty Linux"
       <<: *trusty-steps
       python: 3.7
-    # Xenial Linux      
+    # Xenial Linux
     - name: "Python 2.7 on Xenial Linux"
       <<: *xenial-steps
       python: 2.7
@@ -67,19 +73,32 @@ matrix:
     - name: "Python 2.7 on Windows"
       <<: *windows-steps
       python: 2.7
-      before_install: choco install python2
+      env: PATH=/c/Python27:/c/Python27/Scripts:$PATH
+      before_install:
+        - choco install python2
+        - python -m pip install --upgrade pip
     - name: "Python 3.5 on Windows"
       <<: *windows-steps
       python: 3.5
-      before_install: choco install python --version 3.5
+      env: PATH=/c/Python35:/c/Python35/Scripts:$PATH
+      before_install:
+        - choco install python --version 3.5.4
+        - python -m pip install --upgrade pip
     - name: "Python 3.6 on Windows"
       <<: *windows-steps
       python: 3.6
-      before_install: choco install python --version 3.6
+      env: PATH=/c/Python36:/c/Python36/Scripts:$PATH
+      before_install:
+        - choco install python --version 3.6.8
+        - python -m pip install --upgrade pip
     - name: "Python 3.7 on Windows"
       <<: *windows-steps
       python: 3.7
-      before_install: choco install python --version 3
+      env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
+      before_install:
+        - choco install python
+        - python -m pip install --upgrade pip
+
 script:
   - python --version ; pip --version || true
   - python2.7 --version ; python2.7 -m pip --version || true
