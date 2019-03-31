@@ -24,10 +24,10 @@ matrix:
       before_install:
         - pyenv --version
         - pyenv install --list
-        - pyenv install 2.7.14 || true
-        - pyenv install 3.5.4 || true
-        - pyenv install 3.6.3 || true
-        - pyenv install 3.7-dev || true
+        - pyenv install --force 2.7.14 || true
+        - pyenv install --force 3.5.4 || true
+        - pyenv install --force 3.6.3 || true
+        - pyenv install --force 3.7-dev || true
     # Xenial Linux cpp
     - name: "Xenial Linux cpp"
       language: cpp
@@ -36,10 +36,10 @@ matrix:
         - pyenv -h
         - pyenv install -h
         - pyenv install --list
-        - pyenv install 2.7.14 || true
-        - pyenv install 3.5.4 || true
-        - pyenv install 3.6.3 || true
-        - pyenv install 3.7-dev || true
+        - pyenv install --force 2.7.14 || true
+        - pyenv install --force 3.5.4 || true
+        - pyenv install --force 3.6.3 || true
+        - pyenv install --force 3.7-dev || true
     # Trusty Linux
     - name: "Python 2.7 on Trusty Linux"
       <<: *trusty-steps
