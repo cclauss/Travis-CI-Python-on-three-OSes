@@ -22,6 +22,15 @@ windows-steps: &windows-steps
   language: shell  # 'language: python' is not yet supported on Travis CI Windows
 
 language: python
+addons:
+  apt:
+    # update: true
+    packages:
+      - pyenv
+  homebrew:
+    # update: true
+    packages:
+      - pyenv
 matrix:
   allow_failures:
     - name: "Python 3.7 on Trusty Linux"
