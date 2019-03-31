@@ -76,7 +76,7 @@ matrix:
         - pyenv install --force 3.7-dev
         - pyenv global 3.7-dev
     # Xenial Linux cpp =====================
-    - name: "Python 3.5 on Xenial Linux cpp"
+    - name: "Python 2.7 on Xenial Linux cpp"
       <<: *xenial-cpp-steps
       before_install:
         - pyenv install --force 2.7.14
@@ -104,8 +104,9 @@ matrix:
       <<: *osx-steps
       python: 3.5
       before_install:
+        - pyenv install --list
         - brew upgrade pyenv
-        - pyenv install 3.5 # .5
+        - pyenv install 3.5.6
     - name: "Python 3.6 on macOS"
       <<: *osx-steps
       python: 3.6
@@ -139,6 +140,7 @@ matrix:
 install: python -m pip install --upgrade pip
 script:
   - python --version ; pip --version
+  - pyenv --version ; pyenv --list || true
   #- which -a python || true
   #- which -a python2 || true
   #- which -a python3 || true
