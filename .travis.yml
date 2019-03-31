@@ -15,6 +15,8 @@ windows-steps: &windows-steps
 
 language: python
 matrix:
+  allow_failures:
+    - name: "Python 3.7 on Trusty Linux"
   include:
     # Trusty Linux
     - name: "Python 2.7 on Trusty Linux"
@@ -73,5 +75,13 @@ script:
   - python --version || true
   - python2 --version || true
   - python3 --version || true
+  - python2.7 --version || true
+  - python3.5 --version || true
+  - python3.6 --version || true
+  - python3.7 --version || true
+  - python2.7 -m pip --version || true
+  - python3.5 -m pip --version || true
+  - python3.6 -m pip --version || true
+  - python3.7 -m pip --version || true
   - py --version || true
   - pip --version || true
