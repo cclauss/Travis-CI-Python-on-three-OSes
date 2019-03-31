@@ -24,6 +24,10 @@ matrix:
       before_install:
         - pyenv --version
         - pyenv install --list
+        - pyenv update || true
+        - pyenv install --list
+        - pyenv upgrade || true
+        - pyenv install --list
         - pyenv install --force 2.7.14 || true
         - pyenv install --force 3.5.4 || true
         - pyenv install --force 3.6.3 || true
