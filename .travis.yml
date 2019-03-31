@@ -20,10 +20,10 @@ matrix:
   include:
     # Trusty Linux cpp
     - name: "Trusty Linux cpp"
-      language: python
+      language: cpp
     # Xenial Linux cpp
     - name: "Xenial Linux cpp"
-      language: python
+      language: cpp
     # Trusty Linux
     - name: "Python 2.7 on Trusty Linux"
       <<: *trusty-steps
