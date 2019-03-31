@@ -21,9 +21,13 @@ matrix:
     # Trusty Linux cpp
     - name: "Trusty Linux cpp"
       language: cpp
+      before_install:
+        - pyenv install python 2.7 3.5 3.6 3.7
     # Xenial Linux cpp
     - name: "Xenial Linux cpp"
       language: cpp
+      before_install:
+        - pyenv install python 2.7 3.5 3.6 3.7
     # Trusty Linux
     - name: "Python 2.7 on Trusty Linux"
       <<: *trusty-steps
