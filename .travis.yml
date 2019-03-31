@@ -36,6 +36,8 @@ matrix:
         - which -a python || true
         - which -a python2 || true
         - which -a python3 || true
+        - which -a python3.4 || true
+        - which -a python3.5 || true
       python: 3.5
     - name: "Python 3.6 on Trusty Linux"
       <<: *trusty-steps
@@ -51,7 +53,9 @@ matrix:
         - which -a python || true
         - which -a python2 || true
         - which -a python3 || true
-    - name: "Python 3.5 on Xenial Linux"
+        - which -a python3.4 || true
+        - which -a python3.5 || true
+   - name: "Python 3.5 on Xenial Linux"
       <<: *xenial-steps
       python: 3.5
     - name: "Python 3.6 on Xenial Linux"
