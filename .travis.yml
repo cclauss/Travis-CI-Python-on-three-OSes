@@ -55,7 +55,7 @@ matrix:
         - which -a python3 || true
         - which -a python3.4 || true
         - which -a python3.5 || true
-   - name: "Python 3.5 on Xenial Linux"
+    - name: "Python 3.5 on Xenial Linux"
       <<: *xenial-steps
       python: 3.5
     - name: "Python 3.6 on Xenial Linux"
