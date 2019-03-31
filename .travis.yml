@@ -23,7 +23,7 @@ matrix:
       language: cpp
       before_install:
         - pyenv --version
-        - pyenv --list
+        - pyenv -h
         - pyenv install python 2.7 || true
         - pyenv install python 3.5 || true
         - pyenv install python 3.6 || true
@@ -33,7 +33,7 @@ matrix:
       language: cpp
       before_install:
         - pyenv --version
-        - pyenv --list
+        - pyenv -h
         - pyenv install python 2.7 || true
         - pyenv install python 3.5 || true
         - pyenv install python 3.6 || true
