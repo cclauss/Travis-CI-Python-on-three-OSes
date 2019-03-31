@@ -28,6 +28,9 @@ matrix:
         - pyenv install --force 3.5.4 || true
         - pyenv install --force 3.6.3 || true
         - pyenv install --force 3.7-dev || true
+        - which -a python || true
+        - which -a python3 || true
+        - which -a python3.6 || true
     # Xenial Linux cpp
     - name: "Xenial Linux cpp"
       language: cpp
