@@ -51,27 +51,35 @@ matrix:
     - name: "Python 3.5 on macOS"
       <<: *osx-steps
       python: 3.5
-      before_install: pyenv install 3.5
+      before_install:
+        - brew install --upgrade pyenv
+        - pyenv install 3.5 # .5
     - name: "Python 3.6 on macOS"
       <<: *osx-steps
       python: 3.6
     - name: "Python 3.7 on macOS"
       <<: *osx-steps
       python: 3.7
-      before_install: pyenv install 3.7
+      before_install:
+       - brew install --upgrade pyenv
+       - pyenv install 3.7
     # Trusty Linux
     - name: "Python 2.7 on Windows"
       <<: *windows-steps
       python: 2.7
+      before_install: choco install python2
     - name: "Python 3.5 on Windows"
       <<: *windows-steps
       python: 3.5
+      before_install: choco install python --version 3.5
     - name: "Python 3.6 on Windows"
       <<: *windows-steps
       python: 3.6
+      before_install: choco install python --version 3.6
     - name: "Python 3.7 on Windows"
       <<: *windows-steps
       python: 3.7
+      before_install: choco install python --version 3
 script:
   - python --version ; pip --version || true
   - python2.7 --version ; python2.7 -m pip --version || true
