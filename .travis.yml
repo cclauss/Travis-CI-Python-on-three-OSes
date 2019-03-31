@@ -5,6 +5,14 @@ xenial-steps: &xenial-steps
   os: linux
   dist: xenial
   
+trusty-cpp-steps: &trusty-cpp-steps
+  <<: *trusty-steps
+  language: cpp
+
+xenial-cpp-steps: &xenial-cpp-steps
+  <<: *xenial-steps
+  language: cpp
+
 osx-steps: &osx-steps
   os: osx
   language: shell  # 'language: python' is not yet supported on Travis CI macOS
@@ -18,35 +26,6 @@ matrix:
   allow_failures:
     - name: "Python 3.7 on Trusty Linux"
   include:
-    # Trusty Linux cpp
-    - name: "Trusty Linux cpp"
-      language: cpp
-      before_install:
-        - pyenv --version
-        - pyenv install --list
-        - pyenv update || true
-        - pyenv install --list
-        - pyenv upgrade || true
-        - pyenv install --list
-        - pyenv install --force 2.7.14 || true
-        - pyenv install --force 3.5.4 || true
-        - pyenv install --force 3.6.3 || true
-        - pyenv install --force 3.7-dev || true
-        - which -a python || true
-        - which -a python3 || true
-        - which -a python3.6 || true
-    # Xenial Linux cpp
-    - name: "Xenial Linux cpp"
-      language: cpp
-      before_install:
-        - pyenv --version
-        - pyenv -h
-        - pyenv install -h
-        - pyenv install --list
-        - pyenv install --force 2.7.14 || true
-        - pyenv install --force 3.5.4 || true
-        - pyenv install --force 3.6.3 || true
-        - pyenv install --force 3.7-dev || true
     # Trusty Linux
     - name: "Python 2.7 on Trusty Linux"
       <<: *trusty-steps
@@ -73,6 +52,68 @@ matrix:
     - name: "Python 3.7 on Xenial Linux"
       <<: *xenial-steps
       python: 3.7
+    # Trusty Linux cpp
+    - name: "Python 2.7 on Trusty Linux cpp"
+      <<: *trusty-cpp-steps
+      before_install:
+        #- pyenv --version
+        #- pyenv install --list
+        #- pyenv update || true
+        #- pyenv install --list
+        - pyenv install --force 2.7.14
+        - pyenv global 2.7.14
+        - python --version | pip --version
+        - pip install --upgrade pip
+    - name: "Python 3.5 on Trusty Linux cpp"
+      <<: *trusty-cpp-steps
+      before_install:
+        - pyenv install --force 3.5.4
+        - pyenv global 3.5.4
+        - python --version | pip --version
+        - pip install --upgrade pip
+    - name: "Python 3.6 on Trusty Linux cpp"
+      <<: *trusty-cpp-steps
+      before_install:
+        - pyenv install --force 3.6.3
+        - pyenv global 3.6
+        - python --version | pip --version
+        - pip install --upgrade pip
+    - name: "Python 3.7-dev on Trusty Linux cpp"
+      <<: *trusty-cpp-steps
+      before_install:
+        - pyenv install --force 3.7-dev
+        - pyenv global 3.7-dev
+        - python --version | pip --version
+        - pip install --upgrade pip
+    # Xenial Linux cpp
+    - name: "Python 3.5 on Xenial Linux cpp"
+      <<: *xenial-cpp-steps
+      before_install:
+        - pyenv install --force 2.7.14
+        - pyenv global 2.7.14
+        - python --version | pip --version
+        - pip install --upgrade pip
+    - name: "Python 3.5 on Xenial Linux cpp"
+      <<: *xenial-cpp-steps
+      before_install:
+        - pyenv install --force 3.5.4
+        - pyenv global 3.5.4
+        - python --version | pip --version
+        - pip install --upgrade pip
+    - name: "Python 3.6 on Xenial Linux cpp"
+      <<: *xenial-cpp-steps
+      before_install:
+        - pyenv install --force 3.6.3
+        - pyenv global 3.6
+        - python --version | pip --version
+        - pip install --upgrade pip
+    - name: "Python 3.7-dev on Xenial Linux cpp"
+      <<: *xenial-cpp-steps
+      before_install:
+        - pyenv install --force 3.7-dev
+        - pyenv global 3.7-dev
+        - python --version | pip --version
+        - pip install --upgrade pip
     # macOS
     - name: "Python 2.7 on macOS"
       <<: *osx-steps
