@@ -26,12 +26,16 @@ matrix:
   allow_failures:
     - name: "Python 3.7 on Trusty Linux"
   include:
-    # Trusty Linux
+    # Trusty Linux =====================
     - name: "Python 2.7 on Trusty Linux"
       <<: *trusty-steps
       python: 2.7
     - name: "Python 3.5 on Trusty Linux"
       <<: *trusty-steps
+      before_install:
+        - which -a python || true
+        - which -a python2 || true
+        - which -a python3 || true
       python: 3.5
     - name: "Python 3.6 on Trusty Linux"
       <<: *trusty-steps
@@ -39,10 +43,14 @@ matrix:
     - name: "Python 3.7 on Trusty Linux"
       <<: *trusty-steps
       python: 3.7
-    # Xenial Linux
+    # Xenial Linux =====================
     - name: "Python 2.7 on Xenial Linux"
       <<: *xenial-steps
       python: 2.7
+      before_install:
+        - which -a python || true
+        - which -a python2 || true
+        - which -a python3 || true
     - name: "Python 3.5 on Xenial Linux"
       <<: *xenial-steps
       python: 3.5
@@ -52,7 +60,7 @@ matrix:
     - name: "Python 3.7 on Xenial Linux"
       <<: *xenial-steps
       python: 3.7
-    # Trusty Linux cpp
+    # Trusty Linux cpp =====================
     - name: "Python 2.7 on Trusty Linux cpp"
       <<: *trusty-cpp-steps
       before_install:
@@ -85,7 +93,7 @@ matrix:
         - pyenv global 3.7-dev
         - python --version | pip --version
         - pip install --upgrade pip
-    # Xenial Linux cpp
+    # Xenial Linux cpp =====================
     - name: "Python 3.5 on Xenial Linux cpp"
       <<: *xenial-cpp-steps
       before_install:
@@ -114,7 +122,7 @@ matrix:
         - pyenv global 3.7-dev
         - python --version | pip --version
         - pip install --upgrade pip
-    # macOS
+    # macOS =====================
     - name: "Python 2.7 on macOS"
       <<: *osx-steps
       python: 2.7
@@ -133,7 +141,7 @@ matrix:
       before_install:
        - brew install --upgrade pyenv
        - pyenv install 3.7
-    # Trusty Linux
+    # Windows =====================
     - name: "Python 2.7 on Windows"
       <<: *windows-steps
       python: 2.7
