@@ -16,21 +16,17 @@ xenial-cpp-steps: &xenial-cpp-steps
 osx-steps: &osx-steps
   os: osx
   language: shell  # 'language: python' is not yet supported on Travis CI macOS
+  addons:
+    homebrew:
+      update: true
+      packages:
+        - pyenv
 
 windows-steps: &windows-steps
   os: windows
   language: shell  # 'language: python' is not yet supported on Travis CI Windows
 
 language: python
-addons:
-  apt:
-    # update: true
-    packages:
-      - pyenv
-  homebrew:
-    # update: true
-    packages:
-      - pyenv
 matrix:
   allow_failures:
     - name: "Python 3.7 on Trusty Linux"
@@ -113,8 +109,6 @@ matrix:
       <<: *osx-steps
       python: 3.5
       before_install:
-        - pyenv install --list
-        - brew upgrade pyenv
         - pyenv install 3.5.6
     - name: "Python 3.6 on macOS"
       <<: *osx-steps
@@ -123,7 +117,7 @@ matrix:
       <<: *osx-steps
       python: 3.7
       before_install:
-       - brew upgrade python
+        - brew upgrade python
     # Windows =====================
     - name: "Python 2.7 on Windows"
       <<: *windows-steps
