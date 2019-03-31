@@ -22,12 +22,22 @@ matrix:
     - name: "Trusty Linux cpp"
       language: cpp
       before_install:
-        - pyenv install python 2.7 3.5 3.6 3.7
+        - pyenv --version
+        - pyeng --list
+        - pyenv install python 2.7 || true
+        - pyenv install python 3.5 || true
+        - pyenv install python 3.6 || true
+        - pyenv install python 3.7 || true
     # Xenial Linux cpp
     - name: "Xenial Linux cpp"
       language: cpp
       before_install:
-        - pyenv install python 2.7 3.5 3.6 3.7
+        - pyenv --version
+        - pyeng --list
+        - pyenv install python 2.7 || true
+        - pyenv install python 3.5 || true
+        - pyenv install python 3.6 || true
+        - pyenv install python 3.7 || true
     # Trusty Linux
     - name: "Python 2.7 on Trusty Linux"
       <<: *trusty-steps
