@@ -1,43 +1,46 @@
+trusty-steps: &trusty-steps
+  os: linux
+
+xenial-steps: &xenial-steps
+  os: linux
+  dist: xenial
+  
 osx-steps: &osx-steps
-  - os: osx
-    language: shell  # 'language: python' is not yet supported on Travis CI macOS
+  os: osx
+  language: shell  # 'language: python' is not yet supported on Travis CI macOS
 
 windows-steps: &windows-steps
-  - os: osx
-    language: shell  # 'language: python' is not yet supported on Travis CI macOS
+  os: windows
+  language: shell  # 'language: python' is not yet supported on Travis CI Windows
 
 language: python
 matrix:
   include:
     # Trusty Linux
     - name: "Python 2.7 on Trusty Linux"
-      os: linux
+      <<: *trusty-steps
       python: 2.7
     - name: "Python 3.5 on Trusty Linux"
-      os: linux
+      <<: *trusty-steps
       python: 3.5
     - name: "Python 3.6 on Trusty Linux"
-      os: linux
+      <<: *trusty-steps
       python: 3.6
     - name: "Python 3.7 on Trusty Linux"
-      os: linux
+      <<: *trusty-steps
       python: 3.7
     # Xenial Linux      
     - name: "Python 2.7 on Xenial Linux"
-      os: linux
-      dist: xenial
+      <<: *xenial-steps
       python: 2.7
     - name: "Python 3.5 on Xenial Linux"
-      os: linux
-      dist: xenial
+      <<: *xenial-steps
       python: 3.5
     - name: "Python 3.6 on Xenial Linux"
-      os: linux
-      dist: xenial
+      <<: *xenial-steps
       python: 3.6
     - name: "Python 3.7 on Xenial Linux"
-      os: linux
-      dist: xenial
+      <<: *xenial-steps
       python: 3.7
     # macOS
     - name: "Python 2.7 on macOS"
