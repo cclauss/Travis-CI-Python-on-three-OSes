@@ -1,3 +1,11 @@
+osx-steps: &osx-steps
+  - os: osx
+    language: shell  # 'language: python' is not yet supported on Travis CI macOS
+
+windows-steps: &windows-steps
+  - os: osx
+    language: shell  # 'language: python' is not yet supported on Travis CI macOS
+
 language: python
 matrix:
   include:
@@ -33,33 +41,34 @@ matrix:
       python: 3.7
     # macOS
     - name: "Python 2.7 on macOS"
-      os: osx
+      <<: *osx-steps
       python: 2.7
     - name: "Python 3.5 on macOS"
-      os: osx
+      <<: *osx-steps
       python: 3.5
     - name: "Python 3.6 on macOS"
-      os: osx
+      <<: *osx-steps
       python: 3.6
     - name: "Python 3.7 on macOS"
-      os: osx
+      <<: *osx-steps
       python: 3.7
     # Trusty Linux
     - name: "Python 2.7 on Windows"
-      os: windows
+      <<: *windows-steps
       python: 2.7
     - name: "Python 3.5 on Windows"
-      os: windows
+      <<: *windows-steps
       python: 3.5
     - name: "Python 3.6 on Windows"
-      os: windows
+      <<: *windows-steps
       python: 3.6
     - name: "Python 3.7 on Windows"
-      os: windows
+      <<: *windows-steps
       python: 3.7
 script:
-  python --version || true
-  python2 --version || true
-  python3 --version || true
-  py --version || true
-  pip --version || true
+  - pip --version || true
+  - python --version || true
+  - python2 --version || true
+  - python3 --version || true
+  - py --version || true
+  - pip --version || true
