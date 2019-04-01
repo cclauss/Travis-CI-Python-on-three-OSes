@@ -175,6 +175,6 @@ script:
   #- python3.7 --version ; python3.7 -m pip --version || true
   #- py --version ; py -m pip --version || true
   #- pip --version ; true
-  - python -c 'from platform import uname ; import sys ; print("Python {}.{}.{} on".format(*sys.version_info) + " {0} {4}: {5}".format(*uname()))'
+  - python platform-info.py
 notifications:
   email: false
