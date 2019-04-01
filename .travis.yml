@@ -1,8 +1,13 @@
 trusty-steps: &trusty-steps
   os: linux
+  before_script:
+    - which -a python2.7 || true
+    - which -a python3.5 || true
+    - which -a python3.6 || true
+    - which -a python3.7 || true
 
 xenial-steps: &xenial-steps
-  os: linux
+  <<: *trusty-steps
   dist: xenial
   
 trusty-cpp-steps: &trusty-cpp-steps
@@ -16,11 +21,16 @@ xenial-cpp-steps: &xenial-cpp-steps
 osx-steps: &osx-steps
   os: osx
   language: shell  # 'language: python' is not yet supported on Travis CI macOS
-  addons:
-    homebrew:
-      update: true
-      packages:
-        - pyenv
+  # addons:
+  #  homebrew:
+  #    update: true
+  #    packages:
+  #      - pyenv
+  before_script:
+    - which -a python2.7 || true
+    - which -a python3.5 || true
+    - which -a python3.6 || true
+    - which -a python3.7 || true
 
 windows-steps: &windows-steps
   os: windows
@@ -62,7 +72,11 @@ matrix:
     # Trusty Linux cpp =====================
     - name: "Python 2.7 on Trusty Linux cpp"
       <<: *trusty-cpp-steps
-      before_install:
+      before_script:
+        - which -a python2.7 || true
+        - which -a python3.5 || true
+        - which -a python3.6 || true
+        - which -a python3.7 || true
         - pyenv install --force 2.7.14
         - pyenv global 2.7.14
     - name: "Python 3.5 on Trusty Linux cpp"
@@ -83,7 +97,11 @@ matrix:
     # Xenial Linux cpp =====================
     - name: "Python 2.7 on Xenial Linux cpp"
       <<: *xenial-cpp-steps
-      before_install:
+      before_script:
+        - which -a python2.7 || true
+        - which -a python3.5 || true
+        - which -a python3.6 || true
+        - which -a python3.7 || true
         - pyenv install --force 2.7.14
         - pyenv global 2.7.14
     - name: "Python 3.5 on Xenial Linux cpp"
@@ -99,6 +117,8 @@ matrix:
     - name: "Python 3.7-dev on Xenial Linux cpp"
       <<: *xenial-cpp-steps
       before_install:
+        - which -a python2.7 ; which -a python3.5 ; which -a python3.6 ; which -a python3.7 || true
+
         - pyenv install --force 3.7-dev
         - pyenv global 3.7-dev
     # macOS =====================
@@ -122,7 +142,12 @@ matrix:
     - name: "Python 2.7 on Windows"
       <<: *windows-steps
       python: 2.7
-      before_install: choco install python2
+      before_script:
+        - which -a python2.7 || true
+        - which -a python3.5 || true
+        - which -a python3.6 || true
+        - which -a python3.7 || true
+        - choco install python2
       env: PATH=/c/Python27:/c/Python27/Scripts:$PATH
     - name: "Python 3.5 on Windows"
       <<: *windows-steps
