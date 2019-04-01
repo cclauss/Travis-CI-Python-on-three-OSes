@@ -27,6 +27,7 @@ xenial-cpp-steps: &xenial-cpp-steps
 
 osx-steps: &osx-steps
   os: osx
+  osx_image: xcode10.2
   language: shell  # 'language: python' is not yet supported on Travis CI macOS
   # addons:
   #  homebrew:
@@ -156,7 +157,9 @@ matrix:
       python: 3.7
       <<: *windows-steps
       install:
+        - ls /c/Python37 || true
         - choco install python
+        - ls /c/Python37 || true
       env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
 
 before_script: python -m pip install --upgrade pip
