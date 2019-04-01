@@ -1,12 +1,12 @@
 which-steps: &which-steps
   before_install:
-    - which -a python2.7 || python2.7 --version || true
+    - which -a python2.7 ; python2.7 --version || true
     - pyenv install --list | grep 2.7 || true
-    - which -a python3.5 || python3.5 --version || true
+    - which -a python3.5 ; python3.5 --version || true
     - pyenv install --list | grep 3.5 || true
-    - which -a python3.6 || python3.6 --version || true
+    - which -a python3.6 ; python3.6 --version || true
     - pyenv install --list | grep 3.6 || true
-    - which -a python3.7 || python3.7 --version || true
+    - which -a python3.7 ; python3.7 --version || true
     - pyenv install --list | grep 3.7 || true
 
 trusty-steps: &trusty-steps
@@ -124,7 +124,7 @@ matrix:
       python: 3.5
       <<: *osx-steps
       install:
-        - pyenv install 3.5.6
+        - pyenv install 3.5.5
     - name: "Python 3.6 on macOS"
       python: 3.6
       <<: *osx-steps
@@ -174,3 +174,5 @@ script:
   #- python3.7 --version ; python3.7 -m pip --version || true
   #- py --version ; py -m pip --version || true
   #- pip --version ; true
+notifications:
+  email: false
