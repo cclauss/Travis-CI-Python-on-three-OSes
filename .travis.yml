@@ -15,7 +15,9 @@ matrix:
       # python: 3.7         # 'python:' is ignored on Travis CI Windows
       before_install:
         - choco install python  # this install takes about 1 min 30 sec
-      env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
+      env:
+        - PATH=/c/Python37:/c/Python37/Scripts:$PATH
+        - python3=py
 
 install:
   - py --version || true
@@ -23,8 +25,8 @@ install:
   - py37 --version || true
   - py3.7 --version || true
   - pip3 install --upgrade pip
-# 'python' is Python 2.7 on Linux and macOS
-# 'python3' is an error on Windows
-script: python3 platform-info.py || python platform-info.py
+# 'python' points to Python 2.7 on macOS but points to  Python 2.7 on Linux and Windows
+# 'python3' is a 'command not found' error on Windows
+script: python3 platform-info.py # || py platform-info.py
 notifications:
   email: false
