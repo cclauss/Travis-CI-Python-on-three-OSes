@@ -2,6 +2,8 @@
 
 What is the minimal __.travis.yml__ file required to run the current Python on Linux, macOS, and Windows?
 
+![Travis-CI_Python_3.7_on_three_OSes](Travis-CI_Python_3.7_on_three_OSes)
+
 Ideally, it would be:
 ```yml
 language: python
