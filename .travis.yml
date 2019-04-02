@@ -15,13 +15,13 @@ matrix:
       # python: 3.7         # 'python:' is ignored on Travis CI Windows
       before_install:
         - choco install python  # this install takes about 1 min 30 sec
-        - doskey python3=py $*  # alias 'python3' to point to Python 3.7
+        - alias python3=py      # alias 'python3' to point to Python 3.7
         - python3 --version || true
-        - doskey python3=py $*  # alias 'python3' to point to Python 3.7
+        - alias python3='py'      # alias 'python3' to point to Python 3.7
         - python3 --version || true
-        - doskey python37=C:\Python37\python.exe $*
+        - alias python37=c/Python37/python.exe
         - python37 --version || true
-        - DOSKEY python37=C:\Python37\python.exe $*
+        - alias python37='c/Python37/python.exe'
         - python37 --version || true
       env:
         - PATH=/c/Python37:/c/Python37/Scripts:$PATH
