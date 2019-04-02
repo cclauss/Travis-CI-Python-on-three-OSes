@@ -9,11 +9,13 @@ matrix:
       osx_image: xcode10.2
       language: shell  # 'language: python' is not yet supported on Travis CI macOS
       # python: 3.7    # 'python:' is ignored on Travis CI macOS
+      before_install: sw_vers
     - name: "Python 3.7 on Windows"
       os: windows
       language: shell  # 'language: python' is not yet supported on Travis CI Windows
       # python: 3.7    # 'python:' is ignored on Travis CI Windows
       before_install:
+        - winver
         - ls /c/Python37 || true
         - choco install python
         - ls /c/Python37 || true
