@@ -1,27 +1,31 @@
-language: python
+language: python            # this works for Linux but not for macOS or Windows
 matrix:
   include:
-    - name: "Python 3.7 on Xenial Linux"
-      python: 3.7
-      dist: xenial
-    - name: "Python 3.7 on macOS"
+    - name: "Python 3.7.1 on Xenial Linux"
+      python: 3.7           # this works for Linux but not for macOS or Windows
+      dist: xenial          # required for Python >= 3.7
+    - name: "Python 3.7.3 on macOS"
       os: osx
-      osx_image: xcode10.2
-      language: shell  # 'language: python' is not yet supported on Travis CI macOS
-      # python: 3.7    # 'python:' is ignored on Travis CI macOS
-      before_install: sw_vers
-    - name: "Python 3.7 on Windows"
+      osx_image: xcode10.2  # Python 3.7.3 running on macOS 10.14.3
+      language: shell       # 'language: python' is an error on Travis CI macOS
+      # python: 3.7         # 'python:' is ignored on Travis CI macOS
+    - name: "Python 3.7.3 on Windows"
       os: windows
-      language: shell  # 'language: python' is not yet supported on Travis CI Windows
-      # python: 3.7    # 'python:' is ignored on Travis CI Windows
+      language: shell       # 'language: python' is an error on Travis CI Windows
+      # python: 3.7         # 'python:' is ignored on Travis CI Windows
       before_install:
-        - winver
-        - ls /c/Python37 || true
-        - choco install python
-        - ls /c/Python37 || true
+        - systeminfo
+        - choco install python  # this install takes about 1 min 30 sec
       env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
 
-install: pip install --upgrade pip
-script: python platform-info.py
+install:
+  - python --version || true
+  - python3 --version || true
+  - python3.7 --version || true
+  - pip --version || true
+  - pip3 --version || true
+  - pip install --upgrade pip || true
+  - pip3 install --upgrade pip || true
+script: python3 platform-info.py
 notifications:
   email: false
