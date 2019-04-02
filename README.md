@@ -10,10 +10,8 @@ os:
   - linux
   - osx
   - windows
-install: pip install --upgrade pip
-script: python platform-info.py
-notifications:
-  email: false
+install: pip3 install --upgrade pip
+script: python3 platform-info.py
 ```
 But what is currently required is: [__.travis.yml__](.travis.yml)
 
