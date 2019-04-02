@@ -4,9 +4,9 @@ matrix:
     - name: "Python 3.7.1 on Xenial Linux"
       python: 3.7           # this works for Linux but not for macOS or Windows
       dist: xenial          # required for Python >= 3.7
-    - name: "Python 3.7.3 on macOS"
+    - name: "Python 3.7.2 on macOS"
       os: osx
-      osx_image: xcode10.2  # Python 3.7.3 running on macOS 10.14.3
+      osx_image: xcode10.2  # Python 3.7.2 running on macOS 10.14.3
       language: shell       # 'language: python' is an error on Travis CI macOS
       # python: 3.7         # 'python:' is ignored on Travis CI macOS
     - name: "Python 3.7.3 on Windows"
@@ -15,18 +15,15 @@ matrix:
       # python: 3.7         # 'python:' is ignored on Travis CI Windows
       before_install:
         - choco install python  # this install takes about 1 min 30 sec
+        - doskey python3=py     # alias 'python3' to point to Python 3.7
       env:
         - PATH=/c/Python37:/c/Python37/Scripts:$PATH
-        - python3=py
 
 install:
-  - py --version || true
-  - py3 --version || true
-  - py37 --version || true
-  - py3.7 --version || true
+  - python3 --version || true
   - pip3 install --upgrade pip
-# 'python' points to Python 2.7 on macOS but points to  Python 2.7 on Linux and Windows
-# 'python3' is a 'command not found' error on Windows
-script: python3 platform-info.py # || py platform-info.py
+# 'python' points to Python 2.7 on macOS but points to Python 3.7 on Linux and Windows
+# 'python3' is a 'command not found' error on Windows without the doskey command above
+script: python3 platform-info.py # || python platform-info.py
 notifications:
   email: false
