@@ -1,27 +1,32 @@
 language: python            # this works for Linux but not for macOS or Windows
 matrix:
   include:
-    - name: "Python 3.7.1 on Xenial Linux"
-      python: 3.7           # this works for Linux but not for macOS or Windows
-      dist: xenial          # required for Python >= 3.7
-    - name: "Python 3.7.2 on macOS"
-      os: osx
-      osx_image: xcode10.2  # Python 3.7.2 running on macOS 10.14.3
-      language: shell       # 'language: python' is an error on Travis CI macOS
-      # python: 3.7         # 'python:' is ignored on Travis CI macOS
+    #- name: "Python 3.7.1 on Xenial Linux"
+    #  python: 3.7           # this works for Linux but not for macOS or Windows
+    #  dist: xenial          # required for Python >= 3.7
+    #- name: "Python 3.7.2 on macOS"
+    #  os: osx
+    #  osx_image: xcode10.2  # Python 3.7.2 running on macOS 10.14.3
+    #  language: shell       # 'language: python' is an error on Travis CI macOS
+    #  # python: 3.7         # 'python:' is ignored on Travis CI macOS
     - name: "Python 3.7.3 on Windows"
       os: windows           # Windows 10.0.17134 N/A Build 17134
       language: shell       # 'language: python' is an error on Travis CI Windows
       # python: 3.7         # 'python:' is ignored on Travis CI Windows
       before_install:
         - choco install python  # this install takes about 1 min 30 sec
-        - doskey python3=py     # alias 'python3' to point to Python 3.7
+        - doskey python3=py $*  # alias 'python3' to point to Python 3.7
+        - python3 --version || true
+        - doskey python3=py $*  # alias 'python3' to point to Python 3.7
+        - python3 --version || true
+        - doskey python37=C:\Python37\python.exe $*
+        - python37 --version || true
+        - DOSKEY python37=C:\Python37\python.exe $*
+        - python37 --version || true
       env:
         - PATH=/c/Python37:/c/Python37/Scripts:$PATH
 
-install:
-  - python3 --version || true
-  - pip3 install --upgrade pip
+install: pip3 install --upgrade pip
 # 'python' points to Python 2.7 on macOS but points to Python 3.7 on Linux and Windows
 # 'python3' is a 'command not found' error on Windows without the doskey command above
 script: python3 platform-info.py # || python platform-info.py
