@@ -1,180 +1,25 @@
-which-steps: &which-steps
-  before_install:
-    - which -a python2.7 ; python2.7 --version || true
-    - pyenv install --list | grep 2.7 || true
-    - which -a python3.5 ; python3.5 --version || true
-    - pyenv install --list | grep 3.5 || true
-    - which -a python3.6 ; python3.6 --version || true
-    - pyenv install --list | grep 3.6 || true
-    - which -a python3.7 ; python3.7 --version || true
-    - pyenv install --list | grep 3.7 || true
-
-trusty-steps: &trusty-steps
-  os: linux
-  <<: *which-steps
-
-xenial-steps: &xenial-steps
-  <<: *trusty-steps
-  dist: xenial
-  
-trusty-cpp-steps: &trusty-cpp-steps
-  <<: *trusty-steps
-  language: cpp
-
-xenial-cpp-steps: &xenial-cpp-steps
-  <<: *xenial-steps
-  language: cpp
-
-osx-steps: &osx-steps
-  os: osx
-  language: shell  # 'language: python' is not yet supported on Travis CI macOS
-  # addons:
-  #  homebrew:
-  #    update: true
-  #    packages:
-  #      - pyenv
-  <<: *which-steps
-
-windows-steps: &windows-steps
-  os: windows
-  language: shell  # 'language: python' is not yet supported on Travis CI Windows
-  <<: *which-steps
-
 language: python
 matrix:
-  allow_failures:
-    - name: "Python 3.7 on Trusty Linux"
-    - name: "Python 3.7-dev on Trusty Linux cpp"
-    - name: "Python 3.7-dev on Xenial Linux cpp"
   include:
-    # Trusty Linux =====================
-    - name: "Python 2.7 on Trusty Linux"
-      <<: *trusty-steps
-      python: 2.7
-    - name: "Python 3.5 on Trusty Linux"
-      <<: *trusty-steps
-      python: 3.5
-    - name: "Python 3.6 on Trusty Linux"
-      <<: *trusty-steps
-      python: 3.6
-    - name: "Python 3.7 on Trusty Linux"
-      <<: *trusty-steps
-      python: 3.7
-    # Xenial Linux =====================
-    - name: "Python 2.7 on Xenial Linux"
-      <<: *xenial-steps
-      python: 2.7
-    - name: "Python 3.5 on Xenial Linux"
-      <<: *xenial-steps
-      python: 3.5
-    - name: "Python 3.6 on Xenial Linux"
-      <<: *xenial-steps
-      python: 3.6
     - name: "Python 3.7 on Xenial Linux"
-      <<: *xenial-steps
       python: 3.7
-    # Trusty Linux cpp =====================
-    - name: "Python 2.7 on Trusty Linux cpp"
-      <<: *trusty-cpp-steps
-      install:
-        - pyenv install --force 2.7.14
-        - pyenv global 2.7.14
-    - name: "Python 3.5 on Trusty Linux cpp"
-      <<: *trusty-cpp-steps
-      install:
-        - pyenv install --force 3.5.4
-        - pyenv global 3.5.4
-    - name: "Python 3.6 on Trusty Linux cpp"
-      <<: *trusty-cpp-steps
-      install:
-        - pyenv install --force 3.6.3
-        - pyenv global 3.6.3
-    - name: "Python 3.7-dev on Trusty Linux cpp"
-      <<: *trusty-cpp-steps
-      install:
-        - pyenv install --force 3.7-dev
-        - pyenv global 3.7-dev
-    # Xenial Linux cpp =====================
-    - name: "Python 2.7 on Xenial Linux cpp"
-      <<: *xenial-cpp-steps
-      install:
-        - pyenv install --force 2.7.14
-        - pyenv global 2.7.14
-    - name: "Python 3.5 on Xenial Linux cpp"
-      <<: *xenial-cpp-steps
-      install:
-        - pyenv install --force 3.5.4
-        - pyenv global 3.5.4
-    - name: "Python 3.6 on Xenial Linux cpp"
-      <<: *xenial-cpp-steps
-      install:
-        - pyenv install --force 3.6.3
-        - pyenv global 3.6.3
-    - name: "Python 3.7-dev on Xenial Linux cpp"
-      <<: *xenial-cpp-steps
-      install:
-        - pyenv install --force 3.7-dev
-        - pyenv global 3.7-dev
-    # macOS =====================
-    - name: "Python 2.7 on macOS"
-      python: 2.7
-      <<: *osx-steps
-    - name: "Python 3.5 on macOS"
-      <<: *osx-steps
-      python: 3.5
-      <<: *osx-steps
-      install:
-        - pyenv install 3.5.5
-    - name: "Python 3.6 on macOS"
-      python: 3.6
-      <<: *osx-steps
+      dist: xenial
     - name: "Python 3.7 on macOS"
-      python: 3.7
+      os: osx
       osx_image: xcode10.2
-      <<: *osx-steps
-    # Windows =====================
-    - name: "Python 2.7 on Windows"
-      python: 2.7
-      <<: *windows-steps
-      install:
-        - choco install python2
-      env: PATH=/c/Python27:/c/Python27/Scripts:$PATH
-    - name: "Python 3.5 on Windows"
-      python: 3.5
-      <<: *windows-steps
-      install:
-        - choco install python --version 3.5.4
-      env: PATH=/c/Python35:/c/Python35/Scripts:$PATH
-    - name: "Python 3.6 on Windows"
-      python: 3.6
-      <<: *windows-steps
-      install:
-        - choco install python --version 3.6.8
-      env: PATH=/c/Python36:/c/Python36/Scripts:$PATH
+      language: shell  # 'language: python' is not yet supported on Travis CI macOS
+      # python: 3.7    # 'python:' is ignored on Travis CI macOS
     - name: "Python 3.7 on Windows"
-      python: 3.7
-      <<: *windows-steps
-      install:
+      os: windows
+      language: shell  # 'language: python' is not yet supported on Travis CI Windows
+      # python: 3.7    # 'python:' is ignored on Travis CI Windows
+      before_install:
         - ls /c/Python37 || true
         - choco install python
         - ls /c/Python37 || true
       env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
 
-before_script: python -m pip install --upgrade pip
-script:
-  - python --version ; pip --version
-  - pyenv --version ; pyenv install --list || true
-  #- which -a python || true
-  #- which -a python2 || true
-  #- which -a python3 || true
-  #- which -a python3.4 || true
-  #- which -a python3.5 || true
-  #- python2.7 --version ; python2.7 -m pip --version || true
-  #- python3.5 --version ; python3.5 -m pip --version || true
-  #- python3.6 --version ; python3.6 -m pip --version || true
-  #- python3.7 --version ; python3.7 -m pip --version || true
-  #- py --version ; py -m pip --version || true
-  #- pip --version ; true
-  - python platform-info.py
+install: pip install --upgrade pip
+script: python platform-info.py
 notifications:
   email: false
