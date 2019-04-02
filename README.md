@@ -15,7 +15,7 @@ os:
 install: pip3 install --upgrade pip
 script: python3 platform-info.py
 ```
-But what is currently required is: [__.travis.yml__](.travis.yml)  If a line looks optional, try removing it and see if the tests pass.
+But what is currently required is: [__.travis.yml__](.travis.yml).  If any line looks optional, try removing it and see if the tests pass.
 
 Setup times:
 * ~__15 sec__ for Python 3.7.1 on Xenial Linux -- __dist: xenial__
