@@ -22,4 +22,6 @@ Setup times:
 * ~__15 sec__ for Python 3.7.2 on macOS 10.14.3 -- __osx_image: xcode10.2__
 * ~__1 min 30 sec__ Python 3.7.3 on Windows 10.14.3 -- __choco install python__
 
+As discussed at: https://travis-ci.community/t/python-support-on-windows/241/18
+
 Also see: https://github.com/cclauss/Travis-CI-Python-versions
